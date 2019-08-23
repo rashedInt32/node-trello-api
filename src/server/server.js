@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import { config } from '../config/config';
 import { db } from '../db/connect';
 
+import users from '../routes/api/users';
+
 
 // Initialize express
 const app = express();
@@ -17,6 +19,9 @@ app.use(bodyParser.json());
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => res.json({ msg: "hello " }));
+
+
+app.use('/api/user', users)
 
 // PORT
 const PORT = process.env.PORT || 3900;
