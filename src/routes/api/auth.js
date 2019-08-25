@@ -30,7 +30,9 @@ router.post('/', async (req, res) => {
       msg: 'Password not match!'
     });
 
-  res.status(200).send('success');
+  const token = user.generateAuthToken();
+
+  res.status(200).send(token);
 });
 
 

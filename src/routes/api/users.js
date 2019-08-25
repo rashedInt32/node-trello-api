@@ -37,7 +37,9 @@ router.post('/register', async (req, res) => {
   // Update user password with hashed
   user.password = hashed;
   await user.save();
-  res.send(user);
+
+  const token = user.generateAuthToken();
+  res.header('x-auth-token', token).send(user);
 });
 
 
