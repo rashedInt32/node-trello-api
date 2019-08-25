@@ -1,6 +1,8 @@
 import express from 'express';
+import bcrypt from 'bcryptjs';
 
-import User from '../../models/userSchema';
+import { User, validateUser } from '../../models/userSchema';
+import Post from '../../models/postSchema';
 
 const router = express.Router();
 
@@ -12,15 +14,34 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
-  const result = await User.findOne({email});
-  if (result !== null)
-    return res.send({error: true, msg: 'Email already exists'});
+  // Validate input value to match schema
+  const { error } = validateUser(req.body);
+  if (error) return res.status(400).send({ error: true, msg: error.details[0].message });
 
-  const newUser = new User({ name, email, password });
-  await newUser.save();
+  // Check user already registered or not
+  let user = await User.findOne({ email });
+  if (user)
+    return res.send({ error: true, msg: 'Email already exists' });
 
-  res.send(newUser);
+  user = new User({ name, email, password });
+
+  // Generate hash password
+  bcrypt.genSalt(10, (_, salt) => {
+    bcrypt.hash(password, salt, async (_, hash) => {
+      user.password = hash
+      await user.save();
+      res.send(user);
+    });
+  });
+});
+
+
+router.get('/user-posts', async (req, res) => {
+  const result = await Post.find().populate('author', '_id email');
+  const getUserPost = result.filter(
+    post => post.author.email === req.body.email
+  );
+  res.send(getUserPost);
 })
-
 
 export default router;
