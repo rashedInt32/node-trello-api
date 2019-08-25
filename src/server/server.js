@@ -6,6 +6,7 @@ import { db } from '../db/connect';
 
 import users from '../routes/api/users';
 import posts from '../routes/api/posts';
+import auth from '../routes/api/auth';
 
 
 // Initialize express
@@ -24,6 +25,7 @@ app.get('/', (req, res) => res.json({ msg: "hello " }));
 
 app.use('/api/user', users);
 app.use('/api/posts', posts);
+app.use('/api/auth', auth);
 
 // PORT
 const PORT = process.env.PORT || 3900;

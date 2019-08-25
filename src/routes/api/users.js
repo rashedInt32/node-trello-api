@@ -16,23 +16,28 @@ router.post('/register', async (req, res) => {
 
   // Validate input value to match schema
   const { error } = validateUser(req.body);
-  if (error) return res.status(400).send({ error: true, msg: error.details[0].message });
+  if (error) return res.status(400).send({
+    error: true,
+    msg: error.details[0].message
+  });
 
   // Check user already registered or not
   let user = await User.findOne({ email });
   if (user)
-    return res.send({ error: true, msg: 'Email already exists' });
+    return res.send({
+      error: true,
+      msg: 'Email already exists'
+    });
 
   user = new User({ name, email, password });
 
   // Generate hash password
-  bcrypt.genSalt(10, (_, salt) => {
-    bcrypt.hash(password, salt, async (_, hash) => {
-      user.password = hash
-      await user.save();
-      res.send(user);
-    });
-  });
+  const salt = await bcrypt.genSalt(10);
+  const hashed = await bcrypt.hash(password, salt);
+  // Update user password with hashed
+  user.password = hashed;
+  await user.save();
+  res.send(user);
 });
 
 
