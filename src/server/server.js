@@ -7,6 +7,7 @@ import { db } from '../db/connect';
 import users from '../routes/api/users';
 import posts from '../routes/api/posts';
 import auth from '../routes/api/auth';
+import role from '../routes/api/role';
 
 
 // Initialize express

@@ -12,7 +12,7 @@ const router = express.Router();
  * @api public
  */
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, isAdmin } = req.body;
 
   // Validate input value to match schema
   const { error } = validateUser(req.body);
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
       msg: 'Email already exists'
     });
 
-  user = new User({ name, email, password });
+  user = new User({ name, email, password, isAdmin });
 
   // Generate hash password
   const salt = await bcrypt.genSalt(10);

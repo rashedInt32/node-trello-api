@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
   if (!token)
     return res.status(401).send({
       error: true,
-      msg: 'Access denied, not token provided'
+      msg: 'Access denied, no token provided'
     })
 
   try {
@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
     req.user = decode;
     next();
   } catch (ex) {
-    req.status(400).send({error: true, msg: 'Invalid Token'})
+    req.status(400).send({ error: true, msg: 'Invalid Token' });
   }
 }
 
