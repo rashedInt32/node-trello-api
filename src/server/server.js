@@ -14,7 +14,10 @@ import role from '../routes/api/role';
 const app = express();
 
 // Connect DB
-db.connect(config.dbUri, { useNewUrlParser: true });
+db.connect(config.dbUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +30,7 @@ app.get('/', (req, res) => res.json({ msg: "hello " }));
 app.use('/api/user', users);
 app.use('/api/posts', posts);
 app.use('/api/auth', auth);
+app.use('/api/role', role);
 
 // PORT
 const PORT = process.env.PORT || 3900;
