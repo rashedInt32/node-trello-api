@@ -1,6 +1,9 @@
 import express from 'express';
 import { Role, validateRole } from '../../models/roleSchema';
 
+import auth from '../../middleware/authMiddleware';
+import admin from '../../middleware/adminMiddleware';
+
 const router = express.Router();
 
 /**
@@ -9,7 +12,7 @@ const router = express.Router();
  * @api private
  */
 
-router.get('/', async (_, res) => {
+router.get('/', [auth, admin], async (_, res) => {
   const role = await Role.find();
   res.status(200).send(role);
 })
@@ -19,7 +22,7 @@ router.get('/', async (_, res) => {
  * @desc Create new role
  * @api private
  */
-router.post('/create-role', async (req, res) => {
+router.post('/create-role', [auth, admin], async (req, res) => {
   const { name } = req.body;
 
   // Validate role
