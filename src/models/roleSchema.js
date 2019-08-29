@@ -14,7 +14,6 @@ const roleSchema = new mongoose.Schema({
 const Role = mongoose.model('Role', roleSchema);
 
 const validateRole = (role) => {
-  console.log('from validate');
   const roleValidateSchema = {
     name: Joi.string().min(2).max(50).required(),
   }

@@ -34,7 +34,6 @@ router.post('/create-role', async (req, res) => {
   if (role) return res.send({ error: true, msg: 'Role already exist' });
 
   role = new Role({ name });
-
   await role.save();
 
   res.status(200).send(role);
