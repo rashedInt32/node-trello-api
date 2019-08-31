@@ -27,7 +27,8 @@ const userSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
     default: false
-  }
+  },
+  role: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Role'}]
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -46,7 +47,8 @@ const validateUser = (user) => {
     name: Joi.string().min(5).max(50).required(),
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(1024).required(),
-    isAdmin: Joi.boolean()
+    isAdmin: Joi.boolean(),
+    role: Joi.array()
   }
 
   return Joi.validate(user, validateSchema)

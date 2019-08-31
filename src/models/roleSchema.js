@@ -7,7 +7,8 @@ const roleSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
     maxlength: 50,
-  }
+  },
+  users: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 
