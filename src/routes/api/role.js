@@ -80,4 +80,29 @@ router.post('/set-role', [auth, admin], async (req, res) => {
   });
 });
 
+/**
+* @route /api/role/delete-role
+* @desc set user role by admin
+* @api private
+*/
+
+router.delete('/delete-role', [auth, admin], async (req, res) => {
+  const { roleId } = req.body;
+
+  const role = await Role.find({_id: roleId});
+  if (!role)
+    return res.status(400).send({
+      error: true,
+      msg: 'Role not found.'
+    });
+  const user = await User.find({});
+  user.map(item => {
+    item.role.remove(roleId)
+    return item;
+  });
+  //await newuser.save();
+  // await role.save();
+  res.status(200).send(user);
+});
+
 export default router;
