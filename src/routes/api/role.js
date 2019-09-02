@@ -88,20 +88,22 @@ router.post('/set-role', [auth, admin], async (req, res) => {
 
 router.delete('/delete-role', [auth, admin], async (req, res) => {
   const { roleId } = req.body;
-
-  const role = await Role.find({_id: roleId});
+  // Find role and delete
+  const role = await Role.findOneAndDelete({_id: roleId});
   if (!role)
     return res.status(400).send({
       error: true,
       msg: 'Role not found.'
     });
-  const user = await User.find({});
-  user.map(item => {
-    item.role.remove(roleId)
-    return item;
-  });
-  //await newuser.save();
-  // await role.save();
+
+  // Find user who previously assigned
+  // for this role and remove role id from role array
+  let user = await User.find({});
+  user.map(async item => {
+    item.role.remove(roleId);
+    await item.save();
+  })
+
   res.status(200).send(user);
 });
 
