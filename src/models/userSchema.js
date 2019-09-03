@@ -28,13 +28,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  role: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Role'}]
+  role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role'}
 });
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({
     _id: this._id,
-    isAdmin: this.isAdmin
+    isAdmin: this.isAdmin,
+    role: this.role
   }, config.jwtPrivateKey, {});
   return token;
 }

@@ -5,6 +5,7 @@ import { User } from '../../models/userSchema';
 
 import auth from '../../middleware/authMiddleware';
 import admin from '../../middleware/adminMiddleware';
+import role from '../../middleware/roleMiddleware';
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ const router = express.Router();
  * @api private
  */
 
-router.get('/', [auth, admin], async (_, res) => {
+router.get('/', [auth, role], async (_, res) => {
   const role = await Role.find();
   res.status(200).send(role);
 })
@@ -25,7 +26,7 @@ router.get('/', [auth, admin], async (_, res) => {
  * @api private
  */
 router.post('/create-role', [auth, admin], async (req, res) => {
-  const { name } = req.body;
+  const { name, read, write } = req.body;
 
   // Validate role
   const { error } = validateRole(req.body);
@@ -38,7 +39,7 @@ router.post('/create-role', [auth, admin], async (req, res) => {
   let role = await Role.findOne({ name });
   if (role) return res.send({ error: true, msg: 'Role already exist' });
 
-  role = new Role({ name });
+  role = new Role({ name, read, write });
   await role.save();
 
   res.status(200).send(role);
@@ -69,7 +70,7 @@ router.post('/set-role', [auth, admin], async (req, res) => {
 
   // If no error and user not assigned this
   // role before, set the new role
-  user.role.push(roleId);
+  user.role = roleId;
   role.users.push(user._id);
   await user.save();
   await role.save();
@@ -100,7 +101,9 @@ router.delete('/delete-role', [auth, admin], async (req, res) => {
   // for this role and remove role id from role array
   let user = await User.find({});
   user.map(async item => {
-    item.role.remove(roleId);
+    if (item.role == roleId) {
+      item.role = '';
+    }
     await item.save();
   })
 
