@@ -10,7 +10,8 @@ const router = express.Router();
  * @api public
  */
 router.get("/", async (req, res) => {
-  const posts = await Post.find().populate('author', 'name email');
+  const posts = await Post.find()
+    .populate('author', 'name email');
 
   res.status(200).send(posts);
 });

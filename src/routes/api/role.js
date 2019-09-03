@@ -37,7 +37,10 @@ router.post('/create-role', [auth, admin], async (req, res) => {
     });
 
   let role = await Role.findOne({ name });
-  if (role) return res.send({ error: true, msg: 'Role already exist' });
+  if (role) return res.send({
+    error: true,
+    msg: 'Role already exist'
+  });
 
   role = new Role({ name, read, write });
   await role.save();
@@ -86,7 +89,6 @@ router.post('/set-role', [auth, admin], async (req, res) => {
 * @desc set user role by admin
 * @api private
 */
-
 router.delete('/delete-role', [auth, admin], async (req, res) => {
   const { roleId } = req.body;
   // Find role and delete

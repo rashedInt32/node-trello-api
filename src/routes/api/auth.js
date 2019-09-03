@@ -19,10 +19,14 @@ router.post('/', async (req, res) => {
   // Find user email
   let user = await User.findOne({ email });
   if (!user)
-    return res.send({ error: true, msg: 'Email Not found' });
+    return res.send({
+      error: true,
+      msg: 'Email Not found'
+    });
 
   // Password validation
-  const isValidPassword = await bcrypt.compare(password, user.password);
+  const isValidPassword =
+    await bcrypt.compare(password, user.password);
 
   if (!isValidPassword)
     return res.status(400).send({
