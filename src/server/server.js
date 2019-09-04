@@ -23,17 +23,12 @@ db.connect(config.dbUri, {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// respond with "hello world" when a
-// GET request is made to the homepage
-app.get('/', (req, res) => res.json({ msg: "hello " }));
-
-
+// Apis
 app.use('/api/user', users);
 app.use('/api/posts', posts);
 app.use('/api/auth', auth);
 app.use('/api/role', role);
 
-// PORT
 const PORT = process.env.PORT || 3900;
 // Listen server
 app.listen(PORT, () =>

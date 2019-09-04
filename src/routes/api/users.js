@@ -42,4 +42,16 @@ router.post('/register', async (req, res) => {
   res.header('x-auth-token', token).send(user);
 });
 
+
+router.get('/user-posts', async (req, res) => {
+  const result = await Post.find()
+    .populate('author', '_id email');
+
+  const getUserPost = result.filter(
+    post => post.author.email === req.body.email
+  );
+
+  res.send(getUserPost);
+})
+
 export default router;
