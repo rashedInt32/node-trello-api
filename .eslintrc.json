@@ -1,0 +1,17 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "standard",
+  "rules": {
+    "semi": "error",
+    "no-console": [
+      "error"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ]
+  }
+}

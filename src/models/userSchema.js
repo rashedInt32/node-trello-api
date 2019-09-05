@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 
-import { config } from '../config/config';
+import { JWT_SECRET_KEY } from '../config/config';
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,7 +36,7 @@ userSchema.methods.generateAuthToken = function () {
     _id: this._id,
     isAdmin: this.isAdmin,
     role: this.role
-  }, config.jwtPrivateKey, {});
+  }, JWT_SECRET_KEY, {});
   return token;
 }
 
