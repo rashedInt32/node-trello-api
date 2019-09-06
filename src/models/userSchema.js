@@ -77,7 +77,6 @@ const validateAuthUser = (user) => {
     password: Joi.string().min(5).max(1024).required()
   }
 
-
   return Joi.validate(user, validateSchema)
 }
 
