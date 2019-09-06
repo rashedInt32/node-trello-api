@@ -29,7 +29,7 @@ app.use('/api/posts', posts);
 app.use('/api/auth', auth);
 app.use('/api/role', role);
 
-const LISTEING_PORT = PORT || 3900;
+const LISTEING_PORT = 3900;
 // Listen server
 app.listen(LISTEING_PORT, () =>
   console.log(`Backend listening on port ${PORT}`)

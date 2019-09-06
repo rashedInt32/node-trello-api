@@ -12,7 +12,13 @@ const router = express.Router();
  * @api public
  */
 router.post('/register', async (req, res) => {
-  const { name, email, password, isAdmin } = req.body;
+  const {
+    username,
+    firstname,
+    lastname,
+    email,
+    password,
+    isAdmin } = req.body;
 
   // Validate input value to match schema
   const { error } = validateUser(req.body);
@@ -22,14 +28,30 @@ router.post('/register', async (req, res) => {
   });
 
   // Check user already registered or not
-  let user = await User.findOne({ email });
-  if (user)
+  let user = await User.find({
+    $or: [{ username }, { email }]
+  });
+
+  if (user.length && user[0].email === email)
     return res.send({
       error: true,
       msg: 'Email already exists'
     });
 
-  user = new User({ name, email, password, isAdmin });
+  if (user.length && user[0].username === username)
+    return res.send({
+      error: true,
+      msg: 'Username already taken, try different one'
+    });
+
+  user = new User({
+    username,
+    firstname,
+    lastname,
+    email,
+    password,
+    isAdmin
+  });
 
   // Generate hash password
   const salt = await bcrypt.genSalt(10);
