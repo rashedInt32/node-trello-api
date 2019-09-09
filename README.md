@@ -1,5 +1,7 @@
-#Backend
+#Simple form of node trello example project api
 
+
+## Db Model
 - Model
   - user
     - _id
