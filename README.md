@@ -3,7 +3,7 @@
 
 ## Db Model
 - Model
-  - user
+  - user √
     - _id
     - username
     - firstname
