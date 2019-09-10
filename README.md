@@ -32,15 +32,7 @@
     - _id
     - idMemberCreator
     - idBoard
-    - data {
-      - list {
-        - _id
-        - name
-    }
-    - card {
-      - _id
-      - name
-    }
+    - closed
   }
 
   - Card
