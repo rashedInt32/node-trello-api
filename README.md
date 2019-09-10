@@ -45,4 +45,16 @@
     - idList
     - idMembers []
 
+  - CheckList
+    - name
+    - idBoard
+    - idCard
+    - checkItems [
+      {
+        - state: String // complete/incomplete
+        - idCheckList
+        - name
+      }
+    ]
+
 
