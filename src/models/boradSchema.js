@@ -17,8 +17,10 @@ const boardSchema = new mongoose.Schema({
     default: false
   },
   membership: [{
-    idMember: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    idMember: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
     memberType: String,
   }],
 });

@@ -8,6 +8,7 @@ import users from '../routes/api/users';
 import posts from '../routes/api/posts';
 import auth from '../routes/api/auth';
 import role from '../routes/api/role';
+import board from '../routes/api/board';
 
 
 // Initialize express
@@ -28,6 +29,7 @@ app.use('/api/user', users);
 app.use('/api/posts', posts);
 app.use('/api/auth', auth);
 app.use('/api/role', role);
+app.use('/api/board', board);
 
 const LISTEING_PORT = 3900;
 // Listen server
