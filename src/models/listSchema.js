@@ -31,4 +31,4 @@ const validateList = list => {
 };
 
 
-export { List, valideList };
+export { List, validateList };

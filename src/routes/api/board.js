@@ -21,8 +21,31 @@ router.get("/", auth,  async (req, res) => {
   return res.status(200).send(boards)
 });
 
+
+
+
 /**
-* @routes GET /api/board
+* @routes GET /api/board/delete
+* @desc Board routes to get all borads
+* @api private
+*/
+router.delete("/delete/:id", auth, async (req, res) => {
+  const { id } = req.params;
+
+  let board = await Board.findOneAndDelete({ _id: id });
+  console.log(board);
+  if (!board)
+    return res.status(400).send({
+      error: true,
+      msg: 'There is no board to delete'
+    });
+
+  res.status(200).send({error: true, msg: 'Board deleted'});
+});
+
+
+/**
+* @routes GET /api/
 * @desc Board routes to get all borads
 * @api private
 */

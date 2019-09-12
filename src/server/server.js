@@ -9,6 +9,7 @@ import posts from '../routes/api/posts';
 import auth from '../routes/api/auth';
 import role from '../routes/api/role';
 import board from '../routes/api/board';
+import list from '../routes/api/list';
 
 
 // Initialize express
@@ -30,6 +31,7 @@ app.use('/api/posts', posts);
 app.use('/api/auth', auth);
 app.use('/api/role', role);
 app.use('/api/board', board);
+app.use('/api/list', list);
 
 const LISTEING_PORT = 3900;
 // Listen server
