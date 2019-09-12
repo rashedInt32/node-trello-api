@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { Board } from '../../models/boradSchema';
+import { Board } from '../../models/boardSchema';
 import auth from '../../middleware/authMiddleware';
 
 const router = express.Router();

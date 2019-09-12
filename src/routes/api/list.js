@@ -1,6 +1,7 @@
 import express from 'express';
 import auth from '../../middleware/authMiddleware';
 import { List } from '../../models/listSchema';
+import { Board } from '../../models/boardSchema';
 
 const router = express.Router();
 
@@ -28,6 +29,11 @@ router.post('/create', auth, async (req, res) => {
   });
 
   await list.save();
+
+  let board = await Board.findById(idBoard);
+  board.lists.push(list._id);
+  await board.save();
+
   res.status(200).send(list);
 });
 

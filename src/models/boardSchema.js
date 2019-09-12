@@ -23,6 +23,12 @@ const boardSchema = new mongoose.Schema({
     },
     memberType: String,
   }],
+  lists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'List'
+    }
+  ]
 });
 
 const Board = mongoose.model('board', boardSchema);
