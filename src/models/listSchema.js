@@ -17,7 +17,11 @@ const listSchema = new mongoose.Schema({
   closed: {
     type: Boolean,
     default: false
-  }
+  },
+  idCard: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Card'
+  }]
 });
 
 const List = mongoose.model('list', listSchema);

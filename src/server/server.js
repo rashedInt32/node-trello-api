@@ -10,6 +10,7 @@ import auth from '../routes/api/auth';
 import role from '../routes/api/role';
 import board from '../routes/api/board';
 import list from '../routes/api/list';
+import card from '../routes/api/card';
 
 
 // Initialize express
@@ -32,6 +33,7 @@ app.use('/api/auth', auth);
 app.use('/api/role', role);
 app.use('/api/board', board);
 app.use('/api/list', list);
+app.use('/api/card', card);
 
 const LISTEING_PORT = 3900;
 // Listen server
