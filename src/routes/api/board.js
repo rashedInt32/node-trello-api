@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { Board } from '../../models/boardSchema';
+import { List } from '../../models/listSchema';
 import auth from '../../middleware/authMiddleware';
 
 const router = express.Router();
@@ -28,9 +29,9 @@ router.get("/", auth,  async (req, res) => {
 */
 router.get("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const board = await Board.find({ _id: id }).populate('lists');
+  const board = await Board.find({_id: id }).populate({path: 'lists', model: List});
 
-  console.log(board[0].lists);
+  console.log(board);
   if (!board)
     return res.status(400).send({
       error: true,
