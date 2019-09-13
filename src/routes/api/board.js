@@ -21,6 +21,25 @@ router.get("/", auth,  async (req, res) => {
   return res.status(200).send(boards)
 });
 
+/**
+* @routes GET /api/board/:id
+* @desc Board routes to get all borads
+* @api private
+*/
+router.get("/:id", auth,  async (req, res) => {
+  const { id } = req.params;
+  const board = await Board.find({ _id: id }).populate('lists');
+
+  console.log(board[0].lists);
+  if (!board)
+    return res.status(400).send({
+      error: true,
+      msg: 'No board found.'
+    });
+
+  res.status(200).send(board)
+});
+
 
 
 
