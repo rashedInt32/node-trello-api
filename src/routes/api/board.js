@@ -30,7 +30,7 @@ router.get("/", auth,  async (req, res) => {
 */
 router.get("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const board = await Board.find({ _id: id }).populate({
+  const board = await Board.findById({ _id: id }).populate({
     path: 'lists',
     model: List,
     populate: {
@@ -45,7 +45,7 @@ router.get("/:id", auth,  async (req, res) => {
       msg: 'No board found.'
     });
 
-  res.status(200).send({ board: board, card: card})
+  res.status(200).send({ board: board})
 });
 
 
