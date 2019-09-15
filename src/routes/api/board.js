@@ -33,10 +33,6 @@ router.get("/:id", auth,  async (req, res) => {
   const board = await Board.findById({ _id: id }).populate({
     path: 'lists',
     model: List,
-    populate: {
-      path: 'idCard',
-      model: Card
-    }
   });
 
   if (!board)
