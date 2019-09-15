@@ -28,6 +28,18 @@ const boardSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'List'
     }
+  ],
+  actions: [
+    {
+      idMember: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      data: {
+        type: Object
+      },
+      action: String
+    }
   ]
 });
 

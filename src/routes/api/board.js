@@ -25,7 +25,7 @@ router.get("/", auth,  async (req, res) => {
 
 /**
 * @routes GET /api/board/:id
-* @desc Board routes to get all borads
+* @desc Board routes to get specific board
 * @api private
 */
 router.get("/:id", auth,  async (req, res) => {
@@ -45,7 +45,7 @@ router.get("/:id", auth,  async (req, res) => {
       msg: 'No board found.'
     });
 
-  res.status(200).send({ board: board})
+  res.status(200).send({ board });
 });
 
 
