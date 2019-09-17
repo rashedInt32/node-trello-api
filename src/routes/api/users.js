@@ -32,18 +32,21 @@ router.post('/register', async (req, res) => {
     $or: [{ username }, { email }]
   });
 
+  // Email already exists
   if (user.length && user[0].email === email)
     return res.send({
       error: true,
       msg: 'Email already exists'
     });
 
+  // username already tanen
   if (user.length && user[0].username === username)
     return res.send({
       error: true,
       msg: 'Username already taken, try different one'
     });
 
+  // Create user
   user = new User({
     username,
     firstname,
@@ -74,6 +77,6 @@ router.get('/user-posts', async (req, res) => {
   );
 
   res.send(getUserPost);
-})
+});
 
 export default router;

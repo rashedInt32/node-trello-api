@@ -16,8 +16,10 @@ const checkListSchema = new mongoose.Schema({
   checkItems: [
     {
       state: String,
-      idCheckList: mongoose.Schema.Types.ObjectId,
-      ref: 'CheckList',
+      idCheckList: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CheckList',
+      },
       name: String
     }
   ]

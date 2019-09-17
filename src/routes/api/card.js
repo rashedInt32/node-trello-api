@@ -14,8 +14,6 @@ router.post('/create', auth, async (req, res) => {
   });
 
   let list = await List.findById(idList);
-  list.idCard.push(card._id);
-  await list.save();
 
   let board = await Board.findById(idBoard);
   board.actions.push({
