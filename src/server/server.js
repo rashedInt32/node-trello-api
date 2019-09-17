@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import { PORT, MONGODB_URI } from '../config/config';
 import { db } from '../db/connect';
@@ -25,6 +26,8 @@ db.connect(MONGODB_URI, {
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 // Apis
 app.use('/api/user', users);
