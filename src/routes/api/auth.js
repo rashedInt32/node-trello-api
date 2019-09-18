@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
   // Validate input value to match schema
   const { error } = validateAuthUser(req.body);
   if (error)
-    return res.status(400).send({
+    return res.send({
       error: true,
       msg: error.details[0].message
     });
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   // Find user email
   let user = await User.findOne({ email });
   if (!user)
-    return res.send({
+    return res.status(400).send({
       error: true,
       msg: 'Email Not found'
     });
