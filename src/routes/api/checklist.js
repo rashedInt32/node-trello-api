@@ -1,5 +1,5 @@
 import express from 'express';
-import Auth from '../../middleware/authMiddleware';
+import auth from '../../middleware/authMiddleware';
 import { CheckList } from '../../models/checkListSchema';
 
 const router = express.Router();
@@ -9,7 +9,7 @@ const router = express.Router();
  * @desc Create check list
  * @api private
  */
-router.post('/create', Auth, async (req, res) => {
+router.post('/create', auth, async (req, res) => {
   const { name, idBoard, idCard } = req.body;
 
   const checklist = await CheckList.create({ name, idBoard, idCard });
