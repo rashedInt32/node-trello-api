@@ -34,14 +34,14 @@ router.post('/register', async (req, res) => {
 
   // Email already exists
   if (user.length && user[0].email === email)
-    return res.send({
+    return res.status(400).send({
       error: true,
       msg: 'Email already exists'
     });
 
   // username already tanen
   if (user.length && user[0].username === username)
-    return res.send({
+    return res.status(400).send({
       error: true,
       msg: 'Username already taken, try different one'
     });
