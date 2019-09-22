@@ -8,6 +8,11 @@ const boardSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 100
   },
+  idOrganization: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    require: true
+  },
   closed: {
     type: Boolean,
     default: false

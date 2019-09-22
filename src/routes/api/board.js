@@ -13,7 +13,7 @@ const router = express.Router();
 * @api private
 */
 router.get("/", auth,  async (req, res) => {
-  const boards = await Board.find({ closed: false });
+  const boards = await Board.find({ closed: false, idOrganization:  req.user._id });
   if (!boards)
     return res.status(400).send({
       error: true,
@@ -73,7 +73,7 @@ router.delete("/delete/:id", auth, async (req, res) => {
 * @api private
 */
 router.post("/create", auth, async (req, res) => {
-  const { name } = req.body;
+  const { name, idOrganization } = req.body;
 
   let board = await Board.find({ name });
   if (board.length)
@@ -82,7 +82,7 @@ router.post("/create", auth, async (req, res) => {
       msg: 'There is another board with the same name'
     });
 
-  board = new Board({ name });
+  board = new Board({ name, idOrganization });
   await board.save();
   res.status(200).send(board);
 });

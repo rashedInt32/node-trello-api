@@ -49,7 +49,8 @@ userSchema.methods.generateAuthToken = function () {
     firstname: this.firstname,
     lastname: this.lastname,
     isAdmin: this.isAdmin,
-    role: this.role
+    role: this.role,
+    _id: this._id
   }, JWT_SECRET_KEY, {});
 
   return token;
