@@ -73,16 +73,9 @@ router.delete("/delete/:id", auth, async (req, res) => {
 * @api private
 */
 router.post("/create", auth, async (req, res) => {
-  const { name, idOrganization } = req.body;
+  const { name } = req.body;
 
-  let board = await Board.find({ name });
-  if (board.length)
-    return res.status(400).send({
-      error: true,
-      msg: 'There is another board with the same name'
-    });
-
-  board = new Board({ name, idOrganization });
+  let board = new Board({ name, idOrganization: req.user._id });
   await board.save();
   res.status(200).send(board);
 });
