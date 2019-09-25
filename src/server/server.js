@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import 'express-async-errors';
+//import 'express-async-errors';
 
 import { PORT, MONGODB_URI } from '../config/config';
 import { db } from '../db/connect';
@@ -30,7 +30,11 @@ db.connect(MONGODB_URI, {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: 'x-auth-token',
+  })
+);
 
 // Apis
 app.use('/api/user', users);
