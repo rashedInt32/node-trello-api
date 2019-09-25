@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import 'express-async-errors';
+
 import { PORT, MONGODB_URI } from '../config/config';
 import { db } from '../db/connect';
 
