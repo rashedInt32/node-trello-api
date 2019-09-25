@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { Board } from '../../models/boardSchema';
+import { Board, validateBoard } from "../../models/boardSchema";
 import { List } from '../../models/listSchema';
 import { Card } from '../../models/cardSchema';
 import auth from '../../middleware/authMiddleware';
@@ -74,6 +74,13 @@ router.delete("/delete/:id", auth, async (req, res) => {
 */
 router.post("/create", auth, async (req, res) => {
   const { name } = req.body;
+
+  let { error } = validateBoard(name);
+  if (erro)
+    return res.status(400).send({
+      error: true,
+      msg: error.details[0].message
+    });
 
   let board = new Board({ name, idOrganization: req.user._id });
   await board.save();
