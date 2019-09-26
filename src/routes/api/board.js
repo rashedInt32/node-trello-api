@@ -44,6 +44,28 @@ router.get("/:id", auth,  async (req, res) => {
   res.status(200).send({ board });
 });
 
+/**
+* @routes GET /api/board/:id
+* @desc Board routes to get specific board
+* @api private
+*/
+router.put("/:id", auth,  async (req, res) => {
+  const { id } = req.params;
+  const { name, actions, lists, membership, closed,
+  } = req.body;
+  const board = await Board.findOneAndUpdate({ _id: id }, {
+    name, actions, lists, membership, closed
+  });
+
+  if (!board)
+    return res.status(400).send({
+      error: true,
+      msg: 'No board found.'
+    });
+
+  res.status(200).send({ board });
+});
+
 
 
 
@@ -74,13 +96,6 @@ router.delete("/delete/:id", auth, async (req, res) => {
 */
 router.post("/create", auth, async (req, res) => {
   const { name } = req.body;
-
-  let { error } = validateBoard(name);
-  if (erro)
-    return res.status(400).send({
-      error: true,
-      msg: error.details[0].message
-    });
 
   let board = new Board({ name, idOrganization: req.user._id });
   await board.save();
