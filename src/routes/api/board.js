@@ -51,10 +51,10 @@ router.get("/:id", auth,  async (req, res) => {
 */
 router.put("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const { name, actions, lists, membership, closed,
+  const {_id, name, actions, lists, membership, closed,
   } = req.body;
-  const board = await Board.findOneAndUpdate({ _id: id }, {
-    name, actions, lists, membership, closed
+  const board = await Board.findOneAndUpdate({_id: id}, {
+   _id, name, actions, lists, membership, closed
   });
 
   if (!board)

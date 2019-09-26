@@ -1,8 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
-//import 'express-async-errors';
+import 'express-async-errors';
 
 import { PORT, MONGODB_URI } from '../config/config';
 import { db } from '../db/connect';
@@ -23,8 +24,10 @@ const app = express();
 // Connect DB
 db.connect(MONGODB_URI, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
 });
+
+mongoose.set("useFindAndModify", false);
 
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
