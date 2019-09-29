@@ -39,6 +39,7 @@ app.use(
   })
 );
 
+
 // Apis
 app.use('/api/user', users);
 app.use('/api/posts', posts);

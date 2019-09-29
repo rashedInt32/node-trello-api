@@ -51,10 +51,9 @@ router.get("/:id", auth,  async (req, res) => {
 */
 router.put("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const {_id, name, actions, lists, membership, closed,
-  } = req.body;
+  const {name } = req.body;
   const board = await Board.findOneAndUpdate({_id: id}, {
-   _id, name, actions, lists, membership, closed
+   name
   });
 
   if (!board)
@@ -65,9 +64,6 @@ router.put("/:id", auth,  async (req, res) => {
 
   res.status(200).send({ board });
 });
-
-
-
 
 /**
 * @routes GET /api/board/delete
@@ -88,7 +84,6 @@ router.delete("/delete/:id", auth, async (req, res) => {
   res.status(200).send({error: true, msg: 'Board deleted'});
 });
 
-
 /**
 * @routes GET /api/
 * @desc Board routes to get all borads
@@ -96,6 +91,14 @@ router.delete("/delete/:id", auth, async (req, res) => {
 */
 router.post("/create", auth, async (req, res) => {
   const { name } = req.body;
+
+  const { error } = validateBoard(req.body);
+
+  if (error)
+    return res.status(400).send({
+      error: true,
+      msg: error.details[0].message
+    })
 
   let board = new Board({ name, idOrganization: req.user._id });
   await board.save();
