@@ -41,7 +41,7 @@ router.get("/:id", auth,  async (req, res) => {
       msg: 'No board found.'
     });
 
-  res.status(200).send({ board });
+  res.status(200).send(board);
 });
 
 /**
@@ -52,9 +52,17 @@ router.get("/:id", auth,  async (req, res) => {
 router.put("/:id", auth,  async (req, res) => {
   const { id } = req.params;
   const {name } = req.body;
+
+  const { error } = validateBoard(req.body);
+  if (error)
+    return res.status(400).send({
+      error: true,
+      msg: error.details[0].message
+    });
+
   const board = await Board.findOneAndUpdate({_id: id}, {
    name
-  });
+  }, {new: true});
 
   if (!board)
     return res.status(400).send({
@@ -62,7 +70,7 @@ router.put("/:id", auth,  async (req, res) => {
       msg: 'No board found.'
     });
 
-  res.status(200).send({ board });
+  res.status(200).send(board);
 });
 
 /**
