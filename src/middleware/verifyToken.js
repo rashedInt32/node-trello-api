@@ -11,9 +11,10 @@ const verifyToken = async (req, res, next) => {
     });
 
   try {
-    const decode = await jwt.verify(token, JWT_SECRET_KEY);
-    req.user = decode;
+    const decode =
+      await jwt.verify(token, JWT_SECRET_KEY);
 
+    req.user = decode;
     next();
   } catch (ex) {
     res.status(401).send({ error: true, msg: "Invalid Token", invalid: true });
