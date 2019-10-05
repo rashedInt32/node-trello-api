@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
 
 import 'express-async-errors';
 
@@ -38,6 +39,8 @@ app.use(
     exposedHeaders: 'x-auth-token',
   })
 );
+
+app.use('/static', express.static(path.join(__dirname, '../static/')));
 
 
 // Apis
