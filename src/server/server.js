@@ -40,7 +40,7 @@ app.use(
   })
 );
 
-app.use('/static', express.static(path.join(__dirname, '../static/')));
+app.use("/api/static", express.static(path.join(__dirname, "../static/")));
 
 
 // Apis

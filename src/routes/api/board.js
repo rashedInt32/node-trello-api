@@ -98,7 +98,7 @@ router.delete("/delete/:id", auth, async (req, res) => {
 * @api private
 */
 router.post("/create", auth, async (req, res) => {
-  const { name } = req.body;
+  const { name, bgPath } = req.body;
 
   const { error } = validateBoard(req.body);
 
@@ -108,7 +108,7 @@ router.post("/create", auth, async (req, res) => {
       msg: error.details[0].message
     })
 
-  let board = new Board({ name, idOrganization: req.user._id });
+  let board = new Board({ name, idOrganization: req.user._id, bgPath });
   await board.save();
   res.status(200).send(board);
 });

@@ -45,14 +45,16 @@ const boardSchema = new mongoose.Schema({
       },
       action: String
     }
-  ]
+  ],
+  bgPath: String
 });
 
 const Board = mongoose.model('board', boardSchema);
 
 const validateBoard = (board) => {
   const boardSchema = {
-    name: Joi.string().min(5).max(100).required()
+    name: Joi.string().min(5).max(100).required(),
+    bgPath: Joi.string()
   }
 
   return Joi.validate(board, boardSchema);
