@@ -37,4 +37,21 @@ router.post('/create', auth, async (req, res) => {
   res.status(200).send(list);
 });
 
+
+/**
+ * @routes /list/archive
+ * @desc list of board
+ * @api private
+ */
+router.post('/archive', auth, async (req, res) => {
+  const { id } = req.body;
+  const list = await List.findByIdAndUpdate(
+    id,
+    { closed: true },
+    { new: true }
+  );
+
+  res.status(200).send(list);
+});
+
 export default router;
