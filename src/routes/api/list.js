@@ -1,6 +1,7 @@
 import express from 'express';
 import auth from '../../middleware/authMiddleware';
 import { List } from '../../models/listSchema';
+import { Card } from '../../models/cardSchema';
 import { Board } from '../../models/boardSchema';
 
 const router = express.Router();
@@ -43,13 +44,11 @@ router.post('/create', auth, async (req, res) => {
  * @desc list of board
  * @api private
  */
-router.post('/archive', auth, async (req, res) => {
+router.post('/delete', auth, async (req, res) => {
   const { id } = req.body;
-  const list = await List.findByIdAndUpdate(
-    id,
-    { closed: true },
-    { new: true }
-  );
+  const list = await List.findByIdAndDelete(id);
+  await Card.deleteMany({ idList: id });
+
 
   res.status(200).send(list);
 });
