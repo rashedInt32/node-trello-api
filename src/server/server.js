@@ -17,6 +17,7 @@ import board from '../routes/api/board';
 import list from '../routes/api/list';
 import card from '../routes/api/card';
 import checklist from '../routes/api/checklist';
+import upload from '../routes/api/upload';
 
 
 // Initialize express
@@ -52,6 +53,7 @@ app.use('/api/board', board);
 app.use('/api/list', list);
 app.use('/api/card', card);
 app.use('/api/checklist', checklist);
+app.use('/api/upload', upload);
 
 const LISTEING_PORT = 3900;
 // Listen server
