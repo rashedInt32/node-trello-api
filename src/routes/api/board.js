@@ -45,7 +45,7 @@ router.get("/:id", auth,  async (req, res) => {
 });
 
 /**
-* @routes GET /api/board/:id
+* @routes PUT /api/board/:id
 * @desc Board routes to get specific board
 * @api private
 */
@@ -78,18 +78,17 @@ router.put("/:id", auth,  async (req, res) => {
 * @desc Board routes to get all borads
 * @api private
 */
-router.delete("/delete/:id", auth, async (req, res) => {
-  const { id } = req.params;
+router.delete("/delete/", auth, async (req, res) => {
+  const { id } = req.body;
 
   let board = await Board.findOneAndDelete({ _id: id });
-  console.log(board);
   if (!board)
     return res.status(400).send({
       error: true,
       msg: 'There is no board to delete'
     });
 
-  res.status(200).send({error: true, msg: 'Board deleted'});
+  res.status(200).send({error: false, msg: 'Board deleted'});
 });
 
 /**

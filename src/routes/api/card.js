@@ -1,8 +1,12 @@
 import express from 'express';
+import { remove } from 'lodash';
+
+
 import auth from '../../middleware/authMiddleware';
 import { Card } from '../../models/cardSchema';
 import { Board } from '../../models/boardSchema';
 import { List } from '../../models/listSchema';
+
 
 const router = express.Router();
 
@@ -32,6 +36,22 @@ router.post('/create', auth, async (req, res) => {
   await board.save();
 
   res.status(200).send(card);
+});
+
+// Delete card
+router.delete('/delete', auth, async (req, res) => {
+  const { id, boardId } = req.body;
+  console.log(req.body);
+  await Card.deleteMany({idList: id});
+  let board = await Board.findById(boardId.id);
+
+  const actions = remove(board.actions, (item => item.data.list._id === id));
+  board.actions = actions;
+
+  await board.save();
+
+  res.status(200).send(board);
+
 });
 
 export default router;

@@ -46,9 +46,9 @@ router.post('/create', auth, async (req, res) => {
  */
 router.post('/delete', auth, async (req, res) => {
   const { id } = req.body;
+
   const list = await List.findByIdAndDelete(id);
   await Card.deleteMany({ idList: id });
-
 
   res.status(200).send(list);
 });
