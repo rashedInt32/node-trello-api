@@ -43,7 +43,10 @@ router.delete('/delete', auth, async (req, res) => {
   const { id, boardId } = req.body;
   console.log(req.body);
   await Card.deleteMany({idList: id});
-  let board = await Board.findById(boardId.id);
+  let board = await Board.findById(boardId.id).populate({
+    path: 'lists',
+    model: List,
+  });
 
   const actions = remove(board.actions, (item => item.data.list._id === id));
   board.actions = actions;

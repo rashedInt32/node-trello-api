@@ -4,7 +4,7 @@ import Joi from 'joi';
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: 5,
+    minlength: 2,
     maxlength: 150,
     required: true
   },
@@ -41,7 +41,7 @@ const Card = mongoose.model('card', cardSchema);
 
 const cardValidate = (card) => {
   const schema = {
-    name: Joi.string().min(5).max(150).required(),
+    name: Joi.string().min(2).max(150).required(),
     desc: Joi.string().min(5).max(300),
   }
 
