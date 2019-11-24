@@ -8,8 +8,8 @@ const upload = multer({ dest: './uploads/' });
 
 // Upload route
 router.post('/profile', auth, upload.single('avatar'), async (req, res) => {
-  console.log('call')
-  console.log(req.body);
+  console.log('call', req.file)
+  res.send('file');
 })
 
 export default router;
