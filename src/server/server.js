@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
+import multer from 'multer';
+import crypto from 'crypto';
+import mime from 'mime';
 
 import 'express-async-errors';
 
@@ -17,7 +20,7 @@ import board from '../routes/api/board';
 import list from '../routes/api/list';
 import card from '../routes/api/card';
 import checklist from '../routes/api/checklist';
-import upload from '../routes/api/upload';
+//import upload from '../routes/api/upload';
 
 
 // Initialize express
@@ -31,6 +34,21 @@ db.connect(MONGODB_URI, {
 
 mongoose.set("useFindAndModify", false);
 
+
+var storage = multer.diskStorage({
+  destination: './uploads/',
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err)
+
+      cb(null, raw.toString('hex') + path.extname(file.originalname))
+    })
+  }
+});
+var upload = multer({ storage: storage });
+
+
+
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -41,7 +59,16 @@ app.use(
   })
 );
 
+
 app.use("/api/static", express.static(path.join(__dirname, "../static/")));
+
+
+
+app.post("/api/upload", upload.single("avatar"), async (req, res) => {
+  const file = await req.file;
+
+  res.send(file);
+});
 
 
 // Apis
@@ -53,7 +80,6 @@ app.use('/api/board', board);
 app.use('/api/list', list);
 app.use('/api/card', card);
 app.use('/api/checklist', checklist);
-app.use('/api/upload', upload);
 
 const LISTEING_PORT = 3900;
 // Listen server
