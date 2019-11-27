@@ -50,6 +50,7 @@ userSchema.methods.generateAuthToken = function () {
     lastname: this.lastname,
     isAdmin: this.isAdmin,
     role: this.role,
+    username: this.username,
     _id: this._id
   }, JWT_SECRET_KEY, {expiresIn: '24h'});
 
