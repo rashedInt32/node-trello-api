@@ -11,16 +11,23 @@ var storage = multer.diskStorage({
   filename: async (req, file, cb) => {
     let { user } = await req.body;
     user = JSON.parse(user);
-    await cb(null, user.username + path.extname(file.originalname));
+    try {
+      await cb(null, user.username + path.extname(file.originalname));
+    }
+    catch (ex) {
+      console.log(ex)
+    }
   }
 });
 
 
 const upload = multer({ storage: storage }).single("avatar");
 
+
 // Upload route
 router.post('/', auth, upload, async (req, res) => {
   const file = await req.file;
+  if (!file) return res.status(400).send({ error: true, msg: 'No file selected to upload' });
 
   res.send(file);
 })
