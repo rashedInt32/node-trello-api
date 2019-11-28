@@ -1,9 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const uploadSchema = new mongoose.Schema({
-  { img:
-      { data: Buffer, contentType: String }
-  }
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  avatarUrl: String
 });
 
 const Upload = mongoose.model('upload', uploadSchema);

@@ -41,7 +41,8 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role'}
+  role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role'},
+  avatar: String
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -51,6 +52,7 @@ userSchema.methods.generateAuthToken = function () {
     isAdmin: this.isAdmin,
     role: this.role,
     username: this.username,
+    avatar: this.avatar,
     _id: this._id
   }, JWT_SECRET_KEY, {expiresIn: '24h'});
 

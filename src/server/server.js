@@ -34,12 +34,13 @@ mongoose.set("useFindAndModify", false);
 
 
 
-app.use('/api/upload', upload);
 
 
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
 
 app.use(
   cors({
@@ -54,6 +55,7 @@ app.use("/api/uploads", express.static(path.join(__dirname, "../../uploads/")));
 // Upload route
 
 
+app.use('/api/upload', upload);
 
 // Apis
 app.use('/api/user', users);
