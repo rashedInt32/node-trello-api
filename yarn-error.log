@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/imamulparvez/.fnm/node-versions/v10.13.0/installation/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js add multer
+  /Users/imamulparvez/.fnm/node-versions/v10.13.0/installation/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js add glob del
 
 PATH: 
-  /var/folders/9y/gggnh6gs6kv6mc2pn6csl7k00000gn/T/fnm-shell-5098995/bin:/Users/imamulparvez/.opam/4.04.0/bin:/usr/local/git/bin:/Applications/MAMP/bin/php/php7.2.1/bin:/Users/imamulparvez/.local/bin:/USR/LOCAL/bin:/Users/imamulparvez/.yarn/bin:/Users/imamulparvez/.cargo/bin:/Users/imamulparvez/Library/Android/sdk/emulator:/Users/imamulparvez/Library/Android/sdk/emulator/bin:/Users/imamulparvez/Library/Android/sdk/emulator/bin:/Users/imamulparvez/Library/Android/sdk/platform-tools:/Users/imamulparvez/Library/Android/sdk/platform-tools:/Users/imamulparvez/Library/Android/sdk/emulator/emulator:/Users/imamulparvez/.gem/ruby/2.6.0/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/imamulparvez/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:/Users/imamulparvez/.go/bin:/usr/local/opt/fzf/bin:/usr/local/m-cli:/sbin
+  /var/folders/9y/gggnh6gs6kv6mc2pn6csl7k00000gn/T/fnm-shell-679673/bin:/Users/imamulparvez/.opam/4.04.0/bin:/usr/local/git/bin:/Applications/MAMP/bin/php/php7.2.1/bin:/Users/imamulparvez/.local/bin:/USR/LOCAL/bin:/Users/imamulparvez/.yarn/bin:/Users/imamulparvez/.cargo/bin:/Users/imamulparvez/Library/Android/sdk/emulator:/Users/imamulparvez/Library/Android/sdk/emulator/bin:/Users/imamulparvez/Library/Android/sdk/emulator/bin:/Users/imamulparvez/Library/Android/sdk/platform-tools:/Users/imamulparvez/Library/Android/sdk/platform-tools:/Users/imamulparvez/Library/Android/sdk/emulator/emulator:/Users/imamulparvez/.gem/ruby/2.6.0/bin:/usr/local/opt/ruby/bin:/usr/local/sbin:/Users/imamulparvez/.composer/vendor/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:/Users/imamulparvez/.go/bin:/usr/local/opt/fzf/bin:/usr/local/m-cli:/sbin
 
 Yarn version: 
   1.19.1
@@ -14,12 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/imamulparvez/Documents/github/node-trello/package.json: Unexpected token } in JSON at position 842
-      at JSON.parse (<anonymous>)
-      at /usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:304:30)
-      at /usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:315:13
+  Error: https://registry.yarnpkg.com/glob: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:141224:19)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
+      at Timer.processTimers (timers.js:223:10)
 
 npm manifest: 
   {
@@ -52,7 +52,9 @@ npm manifest:
       "joi": "^14.3.1",
       "jsonwebtoken": "^8.5.1",
       "lodash": "^4.17.15",
+      "mime": "^2.4.4",
       "mongoose": "^5.6.10",
+      "multer": "^1.4.2"
     },
     "devDependencies": {
       "babel-core": "^6.26.3",
@@ -2118,6 +2120,11 @@ Lockfile:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
     integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+  
+  mime@^2.4.4:
+    version "2.4.4"
+    resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.4.tgz#bd7b91135fc6b01cde3e9bae33d659b63d8857e5"
+    integrity sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
   
   mimic-fn@^1.0.0:
     version "1.2.0"

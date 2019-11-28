@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 
 import { User, validateUser } from '../../models/userSchema';
-import Post from '../../models/postSchema';
+import auth from '../../middleware/authMiddleware';
 
 const router = express.Router();
 
@@ -68,15 +68,11 @@ router.post('/register', async (req, res) => {
 });
 
 
-router.get('/user-posts', async (req, res) => {
-  const result = await Post.find()
-    .populate('author', '_id email');
-
-  const getUserPost = result.filter(
-    post => post.author.email === req.body.email
-  );
-
-  res.send(getUserPost);
-});
+// Get user
+router.get('/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).select( '-_id -password');
+  res.status(200).send(user);
+})
 
 export default router;
