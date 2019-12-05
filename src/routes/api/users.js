@@ -71,8 +71,25 @@ router.post('/register', async (req, res) => {
 // Get user
 router.get('/:id', auth, async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).select( '-_id -password');
+  const user = await User.findById(id);
   res.status(200).send(user);
-})
+});
+
+// Update user
+router.put('/:id/update', auth, async (req, res) => {
+  const { id } = req.params;
+  const { data } = req.body;
+  let user = await User.findById(id);
+
+  if (data.password !== user.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(data.password, salt);
+    // Update user password with hashed
+    data.password = hashed;
+  }
+
+  await user.updateOne(data);
+  res.status(200).send(user);
+});
 
 export default router;
