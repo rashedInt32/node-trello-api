@@ -3,6 +3,7 @@ import express from 'express';
 import { Board, validateBoard } from "../../models/boardSchema";
 import { List } from '../../models/listSchema';
 import { Card } from '../../models/cardSchema';
+import { User } from '../../models/userSchema';
 import auth from '../../middleware/authMiddleware';
 
 const router = express.Router();
@@ -30,10 +31,16 @@ router.get("/", auth,  async (req, res) => {
 */
 router.get("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const board = await Board.findById({ _id: id }).populate({
-    path: 'lists',
-    model: List,
-  });
+  const board = await Board.findById({ _id: id }).populate([
+    {
+      path: "lists",
+      model: List
+    },
+    {
+      path: "idOrganization",
+      model: User
+    }
+  ]);
 
   if (!board)
     return res.status(400).send({
