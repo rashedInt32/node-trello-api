@@ -58,7 +58,7 @@ router.get("/:id", auth,  async (req, res) => {
 */
 router.put("/:id", auth,  async (req, res) => {
   const { id } = req.params;
-  const {name } = req.body;
+  const { name, bgPath } = req.body;
 
   const { error } = validateBoard(req.body);
   if (error)
@@ -68,7 +68,8 @@ router.put("/:id", auth,  async (req, res) => {
     });
 
   const board = await Board.findOneAndUpdate({_id: id}, {
-   name
+    name,
+    bgPath
   }, {new: true});
 
   if (!board)

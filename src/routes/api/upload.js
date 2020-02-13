@@ -29,6 +29,7 @@ const uploadMiddleware = multer({ storage: storage }).single("avatar");
 // Upload route
 router.post("/", auth, uploadMiddleware, async (req, res) => {
   const file = await req.file;
+  console.log(file);
   if (!file)
     return res.status(400).send({
       error: true,

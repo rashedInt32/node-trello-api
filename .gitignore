@@ -2,5 +2,8 @@
 /node_modules
 /src/config/config.js
 .env
+now.json
 
 /uploads
+
+.now

@@ -32,15 +32,9 @@ db.connect(MONGODB_URI, {
 
 mongoose.set("useFindAndModify", false);
 
-
-
-
-
 // Initialize body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
 
 app.use(
   cors({
@@ -54,6 +48,7 @@ app.use("/api/uploads", express.static(path.join(__dirname, "../../uploads/")));
 
 // Upload route
 
+app.get("/hello", (req, res) => res.json({ msg: "Hellow" }));
 
 app.use('/api/upload', upload);
 
@@ -67,7 +62,7 @@ app.use('/api/list', list);
 app.use('/api/card', card);
 app.use('/api/checklist', checklist);
 
-const LISTEING_PORT = 3900;
+const LISTEING_PORT = process.env.now || 3900;
 // Listen server
 app.listen(LISTEING_PORT, () =>
   console.log(`Backend listening on port ${PORT}`)

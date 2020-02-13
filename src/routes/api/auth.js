@@ -21,7 +21,8 @@ router.post('/', async (req, res) => {
   if (!user)
     return res.status(400).send({
       error: true,
-      msg: 'Email Not found'
+      msg: 'Email Not found',
+      token: ""
     });
 
   // Password validation
@@ -31,11 +32,14 @@ router.post('/', async (req, res) => {
   if (!isValidPassword)
     return res.status(400).send({
       error: true,
-      msg: 'Password not match!'
+      msg: 'Password not match!',
+      token: ""
     });
 
   const token = user.generateAuthToken();
   res.status(200).header('x-auth-token', token).send({
+    error: false,
+    msg: "Login Successful",
     token: token
   });
 });
