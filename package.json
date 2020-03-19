@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/start.js --exec \"node -r dotenv/config\""
+    "start": "nodemon ./src/start.js --exec \"node -r dotenv/config\"",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel"
   },
   "repository": {
     "type": "git",

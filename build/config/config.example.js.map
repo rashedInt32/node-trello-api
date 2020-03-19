@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/config/config.example.js"],"names":["config","dbUri"],"mappings":";;;;;AAAO,IAAMA,0BAAS;AACpBC,SAAO;AADa,CAAf","file":"config.example.js","sourcesContent":["export const config = {\n  dbUri: \"mongodb://localhost/[DB-Name]\"\n};\n"]}
