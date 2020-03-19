@@ -24,7 +24,8 @@ router.post('/register', async (req, res) => {
   const { error } = validateUser(req.body);
   if (error) return res.status(400).send({
     error: true,
-    msg: error.details[0].message
+    msg: error.details[0].message,
+    token: ''
   });
 
   // Check user already registered or not
@@ -36,14 +37,16 @@ router.post('/register', async (req, res) => {
   if (user.length && user[0].email === email)
     return res.status(400).send({
       error: true,
-      msg: 'Email already exists'
+      msg: 'Email already exists',
+      token: ''
     });
 
   // username already tanen
   if (user.length && user[0].username === username)
     return res.status(400).send({
       error: true,
-      msg: 'Username already taken, try different one'
+      msg: 'Username already taken, try different one',
+      token: ''
     });
 
   // Create user
