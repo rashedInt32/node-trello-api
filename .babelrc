@@ -1,4 +1,12 @@
 {
+  "plugins": [
+    [
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
+  ],
   "presets": [
     "env"
   ]
