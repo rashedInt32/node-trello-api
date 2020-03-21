@@ -77,7 +77,7 @@ app.use('/api/board', _board["default"]);
 app.use('/api/list', _list["default"]);
 app.use('/api/card', _card["default"]);
 app.use('/api/checklist', _checklist["default"]);
-var LISTEING_PORT = process.env.now || 3900; // Listen server
+var LISTEING_PORT = _config.PORT || 3900; // Listen server
 
 app.listen(LISTEING_PORT, function () {
   return console.log("Backend listening on port ".concat(LISTEING_PORT));

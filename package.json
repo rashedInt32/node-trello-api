@@ -8,7 +8,8 @@
     "dev": "nodemon ./src/start.js --exec \"node -r dotenv/config\"",
     "start": "npm run build && node ./build/index.js",
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
+    "cpdir": "cp -r ./static ./build && cp -r ./uploads ./build",
+    "build-babel": "npm run cpdir && babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel"
   },
   "repository": {
@@ -50,6 +51,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "copy-cli": "^1.2.1",
     "eslint": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
