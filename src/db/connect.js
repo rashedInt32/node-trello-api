@@ -10,3 +10,4 @@ export const db = {
     console.log('Check your db connection')
   }
 };
+
