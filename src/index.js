@@ -61,7 +61,7 @@ app.use('/api/list', list)
 app.use('/api/card', card)
 app.use('/api/checklist', checklist)
 
-const LISTEING_PORT = process.env.now || 3900
+const LISTEING_PORT = PORT || 3900;
 // Listen server
 app.listen(LISTEING_PORT, () =>
   console.log(`Backend listening on port ${LISTEING_PORT}`)
