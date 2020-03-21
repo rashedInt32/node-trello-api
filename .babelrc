@@ -1,13 +1,14 @@
 {
   "plugins": [
     [
+      "@babel/plugin-transform-runtime",
       {
-        "polyfill": false,
+        "corejs": false,
         "regenerator": true
       }
     ]
   ],
   "presets": [
-    "env"
+    "@babel/preset-env"
   ]
 }
