@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/start.js --exec \"node -r dotenv/config\"",
+    "dev": "nodemon ./src/start.js --exec \"node -r dotenv/config\"",
+    "start": "npm run build && node ./build/index.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel"
