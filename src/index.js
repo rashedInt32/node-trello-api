@@ -45,10 +45,6 @@ app.use('/api/static', express.static(path.join(__dirname, './static/')))
 app.use('/api/uploads', express.static(path.join(__dirname, './uploads/')))
 
 // Upload route
-
-app.get('/hello', (req, res) => res.json({ msg: 'Hellow' }))
-app.get("/hello-there", (req, res) => res.json({ msg: "Hellow-there" }));
-
 app.use('/api/upload', upload)
 
 // // Apis
